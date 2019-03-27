@@ -5,8 +5,8 @@ from huffman_word_compressor import HuffmanWordComperessor
 from lz_tree_compressor import LZTreeCompressor
 # import ipdb;ipdb.set_trace()
 
-path = '../data/test/*.txt'
-# path = '../data/*.txt'
+# path = '../data/test/*.txt'
+path = '../data/*.txt'
 file_paths = glob.glob(path)
 corpus = ''
 for file_path in file_paths:
