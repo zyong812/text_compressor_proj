@@ -26,8 +26,8 @@ def evaluate(compressor):
     # print(compressor.decode(tgt_file_path)[:1000])
 
 ####### HuffmanLetterComperessor #######
-# hfm_letter = HuffmanLetterComperessor(corpus)
-# evaluate(hfm_letter)
+hfm_letter = HuffmanLetterComperessor(corpus)
+evaluate(hfm_letter)
 
 ####### HuffmanWordComperessor #######
 hfm_word = HuffmanWordComperessor(corpus)
