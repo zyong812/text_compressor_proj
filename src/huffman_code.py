@@ -35,11 +35,11 @@ class HuffmanCode:
         # init tree
         for name, prob in self.prob_dict.items():
             tree.append([name, prob, None, None, False])
-        print(len(tree))
+        # print(len(tree))
 
         # build tree
         while(True):
-            print(len(tree))
+            # print(len(tree))
             # probs = []
             # for i in range(len(tree)):
             #     if tree[i][-1] == False:
