@@ -1,15 +1,26 @@
 import collections
+import pickle
+import os.path
 from bitarray import bitarray
 from huffman_code import HuffmanCode
 
 class HuffmanLetterComperessor:
     def __init__(self, corpus):
         self.name = 'hfm_letter'
-        prob_dict = self._estimate_probabilities(corpus)
-        hfm_tree  = HuffmanCode(prob_dict)
+        self._load_coding_func(corpus)
 
-        self.coding_func    = hfm_tree.assign_codes()
-        self.decoding_func  = dict(map(lambda kv: (kv[1], kv[0]),self.coding_func.items()))
+    def _load_coding_func(self, corpus):
+        dict_file_path = '../data/dict/hfm_letter_code_dict.pkl'
+        if os.path.isfile(dict_file_path):
+            with open(dict_file_path, 'rb') as f:
+                self.coding_func = pickle.load(f)
+        else:
+            prob_dict = self._estimate_probabilities(corpus)
+            hfm_tree  = HuffmanCode(prob_dict)
+            self.coding_func = hfm_tree.assign_codes()
+            with open(dict_file_path, 'wb') as f:
+                pickle.dump(self.coding_func, f)
+        self.decoding_func  = dict(map(lambda kv: (kv[1], kv[0]), self.coding_func.items()))
 
     def encode(self, tgt_file_path, src_file_path=None, src_str=''):
         if src_file_path == None:

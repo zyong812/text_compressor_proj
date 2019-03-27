@@ -30,6 +30,5 @@ def evaluate(compressor):
 # evaluate(hfm_letter)
 
 ####### HuffmanWordComperessor #######
-# 建树过程太耗时，可以考虑把 code 保存下来
 hfm_word = HuffmanWordComperessor(corpus)
 evaluate(hfm_word)

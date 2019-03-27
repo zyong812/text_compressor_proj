@@ -1,18 +1,26 @@
-import numpy as np
-import collections
-import pandas as pd
+import pickle
+import os.path
 from bitarray import bitarray
 from huffman_code import HuffmanCode
 
 class HuffmanWordComperessor:
     def __init__(self, corpus):
         self.name = 'hfm_word'
-        prob_dict = self._word_prob_dict(corpus)
-        hfm_tree  = HuffmanCode(prob_dict)
+        self._load_coding_func(corpus)
 
-        self.coding_func = hfm_tree.assign_codes()
+    def _load_coding_func(self, corpus):
+        dict_file_path = '../data/dict/hfm_word_code_dict.pkl'
+        if os.path.isfile(dict_file_path):
+            with open(dict_file_path, 'rb') as f:
+                self.coding_func = pickle.load(f)
+        else:
+            prob_dict = self._word_prob_dict(corpus)
+            hfm_tree  = HuffmanCode(prob_dict)
+            self.coding_func = hfm_tree.assign_codes()
+            with open(dict_file_path, 'wb') as f:
+                pickle.dump(self.coding_func, f)
         self.decoding_func  = dict(map(lambda kv: (kv[1], kv[0]), self.coding_func.items()))
-    
+
     def encode(self, tgt_file_path, src_file_path=None, src_str=''):
         if src_file_path == None:
             src = src_str
