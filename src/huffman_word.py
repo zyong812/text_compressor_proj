@@ -7,7 +7,6 @@ from huffman_code import HuffmanCode
 class HuffmanWordComperessor:
     def __init__(self, corpus):
         self.name = 'hfm_word'
-        import ipdb;ipdb.set_trace()
         prob_dict = self._word_prob_dict(corpus)
         hfm_tree  = HuffmanCode(prob_dict)
 
@@ -22,7 +21,7 @@ class HuffmanWordComperessor:
                 src = f.read()
 
         # Can optimize with bitarray extend function
-        seg_words = self.word_segmentation(src_str)
+        seg_words = self.word_segmentation(src)
         bits = ''.join(list(map(lambda x: self.coding_func[x], seg_words)))
         with open(tgt_file_path, 'wb') as f:
             bitarray(bits).tofile(f)

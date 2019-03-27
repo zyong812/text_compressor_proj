@@ -40,15 +40,21 @@ class HuffmanCode:
         # build tree
         while(True):
             print(len(tree))
-            probs = []
-            for i in range(len(tree)):
-                if tree[i][-1] == False:
-                    probs.append(tree[i][1])
-                else:
-                    probs.append(np.inf)
-            min1 = np.argmin(probs)
-            probs[min1] = np.inf
-            min2 = np.argmin(probs)
+            # probs = []
+            # for i in range(len(tree)):
+            #     if tree[i][-1] == False:
+            #         probs.append(tree[i][1])
+            #     else:
+            #         probs.append(np.inf)
+            # min1 = np.argmin(probs)
+            # probs[min1] = np.inf
+            # min2 = np.argmin(probs)
+            probs_with_index = [(i, x[1]) for i, x in enumerate(tree) if x[-1] == False]
+            probs = list(map(lambda x: x[1], probs_with_index))
+            prob_min1 = np.argmin(probs)
+            min1  = probs_with_index[prob_min1][0]
+            probs[prob_min1] = np.inf
+            min2 = probs_with_index[np.argmin(probs)][0]
 
             # merge
             min1_row = tree[min1]

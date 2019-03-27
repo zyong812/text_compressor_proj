@@ -4,6 +4,7 @@ from huffman_letter import HuffmanLetterComperessor
 from huffman_word import HuffmanWordComperessor
 # import ipdb;ipdb.set_trace()
 
+# path = '../data/test/*.txt'
 path = '../data/*.txt'
 file_paths = glob.glob(path)
 corpus = ''
@@ -22,19 +23,13 @@ def evaluate(compressor):
         print('\t' + sample_file + '\t' + \
             str(org_size) + ' -> ' + str(compressed_size) + '\t' + \
             'ratio: ' + str(compressed_size / org_size))
-    # print(hfm.decode(tgt_file_path)[:1000])
+    # print(compressor.decode(tgt_file_path)[:1000])
 
 ####### HuffmanLetterComperessor #######
 # hfm_letter = HuffmanLetterComperessor(corpus)
 # evaluate(hfm_letter)
 
 ####### HuffmanWordComperessor #######
+# 建树过程太耗时，可以考虑把 code 保存下来
 hfm_word = HuffmanWordComperessor(corpus)
 evaluate(hfm_word)
-
-filter(lambda x: if x[-1] == False, enumerate(tree))
-probs_with_index = [(i, x[1]) for i, x in enumerate(tree) if x[-1] == False]
-probs = list(map(lambda x: x[1], probs_with_index))
-min1 = probs_with_index[argmin(probs)][0]
-probs[min1] = np.inf
-min2 = probs_with_index[argmin(probs)][0]
