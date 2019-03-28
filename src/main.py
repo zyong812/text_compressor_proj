@@ -16,7 +16,7 @@ for file_path in file_paths:
 def evaluate(compressor):
     print('Evaluation for ' + compressor.name + ':')
     for sample_file in file_paths:
-        tgt_file_path = sample_file.replace('.txt', '_'+ compressor.name + '.bin')
+        tgt_file_path = sample_file.replace('.txt', '_'+ compressor.name + '.compressed')
         compressor.encode(tgt_file_path, src_file_path=sample_file)
 
         org_size        = os.path.getsize(sample_file)
@@ -26,7 +26,7 @@ def evaluate(compressor):
             'ratio: ' + str(compressed_size / org_size))
 
         # validate for decode
-        decompress_path = sample_file.replace('.txt', '_'+ compressor.name + '.d')
+        decompress_path = sample_file.replace('.txt', '_'+ compressor.name + '.decompressed')
         compressor.decode(tgt_file_path, decompress_path)
 
 ####### HuffmanLetterComperessor #######

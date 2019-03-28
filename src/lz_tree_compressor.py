@@ -12,7 +12,8 @@ class LZTreeCompressor:
                 src_bin.fromfile(f)
 
         N = len(src_bin)
-        sub_seuqences = [src_bin[:1].to01()]
+        sub_seuqences = {} # use hash for efficiency
+        sub_seuqences[src_bin[:1].to01()] = 1
         pointer_bit_array = [('', src_bin[:1].to01())]
 
         i = 1
@@ -27,17 +28,16 @@ class LZTreeCompressor:
 
             pointer_bits  = int(np.ceil(np.log2(len(sub_seuqences) + 1)))
             if current_s[:-1] in sub_seuqences:
-                pointer_value = sub_seuqences.index(current_s[:-1]) + 1
+                pointer_value = sub_seuqences[current_s[:-1]]
             else: 
                 pointer_value = 0
             pointer = ("{0:{fill}" + str(pointer_bits) + "b}").format(pointer_value, fill='0')
 
-            sub_seuqences.append(current_s)
+            sub_seuqences[current_s] = len(sub_seuqences) + 1
             pointer_bit_array.append((pointer, current_s[-1]))
             i = j + 1
-            # print(i / N)
 
-        print(pointer_bit_array[:20])
+        # print(pointer_bit_array[:20])
         encoded_seq = ''.join(list(map(lambda x: x[0] + x[1], pointer_bit_array)))
         with open(tgt_file_path, 'wb') as f:
             bitarray(encoded_seq).tofile(f)
@@ -70,7 +70,7 @@ class LZTreeCompressor:
                 s = sub_seuqences[pointer-1] + pb[1]
             sub_seuqences.append(s)
 
-        print(pointer_bit_array[:20])
+        # print(pointer_bit_array[:20])
         decoded_seq = ''.join(sub_seuqences)
         if tgt_file_path != None:
             with open(tgt_file_path, 'wb') as f:
