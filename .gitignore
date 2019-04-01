@@ -1,5 +1,4 @@
 data
-res
 __pycache__/
 *.pyc
 *.bin
