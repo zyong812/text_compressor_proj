@@ -6,8 +6,10 @@ class HuffmanCode:
         self.prob_dict = prob_dict
         self.symbol_count = len(self.prob_dict.keys())
         self._build_tree()
+        self._assign_codes()
+        self._tree_summary()
 
-    def assign_codes(self):
+    def _assign_codes(self):
         # assgin codes (using DFS)
         self.pd_tree['code'] = ''
         root = list(self.pd_tree[self.pd_tree['adopted'] == False].index)[0]
@@ -26,8 +28,8 @@ class HuffmanCode:
 
         symbols = np.array(self.pd_tree.loc[:(self.symbol_count-1), 'name'])
         codes = np.array(self.pd_tree.loc[:, 'code'])
-        coding_func = dict(zip(symbols, codes))
-        return coding_func
+        self.coding_func = dict(zip(symbols, codes))
+        return True
 
     def _build_tree(self):
         tree = []
@@ -39,16 +41,6 @@ class HuffmanCode:
 
         # build tree
         while(True):
-            # print(len(tree))
-            # probs = []
-            # for i in range(len(tree)):
-            #     if tree[i][-1] == False:
-            #         probs.append(tree[i][1])
-            #     else:
-            #         probs.append(np.inf)
-            # min1 = np.argmin(probs)
-            # probs[min1] = np.inf
-            # min2 = np.argmin(probs)
             probs_with_index = [(i, x[1]) for i, x in enumerate(tree) if x[-1] == False]
             probs = list(map(lambda x: x[1], probs_with_index))
             prob_min1 = np.argmin(probs)
@@ -74,3 +66,9 @@ class HuffmanCode:
 
         self.pd_tree = pd.DataFrame(tree, columns=columns)
         return True
+
+    def _tree_summary(self):
+        print(self.symbol_count)
+        # print(self.pd_tree.head(20))
+        with pd.option_context('display.max_rows', 20):
+            print(self.pd_tree)

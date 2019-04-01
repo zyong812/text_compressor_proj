@@ -6,7 +6,7 @@ from huffman_code import HuffmanCode
 
 class HuffmanLetterComperessor:
     def __init__(self, corpus, using_cached_codes=True):
-        self.name = 'hfm_letter'
+        self.name = 'Letter-level Huffman coding'
         self.using_cached_codes = using_cached_codes
         self._load_coding_func(corpus)
 
@@ -17,8 +17,7 @@ class HuffmanLetterComperessor:
                 self.coding_func = json.load(f)
         else:
             prob_dict = self._estimate_probabilities(corpus)
-            hfm_tree  = HuffmanCode(prob_dict)
-            self.coding_func = hfm_tree.assign_codes()
+            self.coding_func = HuffmanCode(prob_dict).coding_func
             with open(dict_file_path, 'w') as f:
                 json.dump(self.coding_func, f)
         self.decoding_func  = dict(map(lambda kv: (kv[1], kv[0]), self.coding_func.items()))

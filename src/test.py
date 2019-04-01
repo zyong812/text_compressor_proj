@@ -17,7 +17,7 @@ def test_for_hfm_letter(corpus):
     print(decode_str)
     print(corpus == decode_str)
 
-test_for_hfm_letter(corpus)
+# test_for_hfm_letter(corpus)
 
 def test_for_hfm_word(corpus):
     file_path = 'lll.bin'
@@ -29,15 +29,16 @@ def test_for_hfm_word(corpus):
     print(decode_str)
     print(corpus == decode_str)
 
-test_for_hfm_word(corpus)
+# test_for_hfm_word(corpus)
 
 def test_for_lz_tree():
     src_bin = bitarray('1011010100010')
     file_path = 'lz.bin'
+    print('Original: ' + src_bin.to01())
 
     lz = LZTreeCompressor()
     lz.encode(file_path, src_str=src_bin)
     decoder_str = lz.decode(bin_file_path=file_path)
-    print(decoder_str)
+    print('Recovered: ' + decoder_str)
 
 test_for_lz_tree()

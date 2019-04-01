@@ -3,7 +3,7 @@ import numpy as np
 
 class LZTreeCompressor:
     def __init__(self):
-        self.name = 'lz_tree'
+        self.name = 'Lempel-Ziv coding'
 
     def encode(self, tgt_file_path, src_file_path=None, src_str=''):
         src_bin = bitarray(src_str)
@@ -37,8 +37,12 @@ class LZTreeCompressor:
             pointer_bit_array.append((pointer, current_s[-1]))
             i = j + 1
 
+        # print('Sub-sequences of bits:', str(sub_seuqences))
+        # print('(pointer, bit) array:', str(pointer_bit_array))
+
         # print(pointer_bit_array[:20])
         encoded_seq = ''.join(list(map(lambda x: x[0] + x[1], pointer_bit_array)))
+        # print('Compressed: ' + encoded_seq)
         with open(tgt_file_path, 'wb') as f:
             bitarray(encoded_seq).tofile(f)
 
