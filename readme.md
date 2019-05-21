@@ -1,16 +1,15 @@
-# Report - Data compression project
+# Text File Compression
 
-- [Report - Data compression project](#report---data-compression-project)
-  - [1. Implementation and results](#1-implementation-and-results)
-    - [1.1 Letter-level Huffman compressor](#11-letter-level-huffman-compressor)
-    - [1.2 Word-level Huffman compressor](#12-word-level-huffman-compressor)
-    - [1.3 Lempel-Ziv compressor](#13-lempel-ziv-compressor)
-  - [2. Evaluation](#2-evaluation)
-    - [2.1 Compare across implemented compressors](#21-compare-across-implemented-compressors)
-    - [2.2 Compare with existing compressor](#22-compare-with-existing-compressor)
-    - [2.3 Evaluate program length](#23-evaluate-program-length)
-  - [3. Discussion](#3-discussion)
-  - [References:](#references)
+- [1. Implementation and results](#1-implementation-and-results)
+  - [1.1 Letter-level Huffman compressor](#11-letter-level-huffman-compressor)
+  - [1.2 Word-level Huffman compressor](#12-word-level-huffman-compressor)
+  - [1.3 Lempel-Ziv compressor](#13-lempel-ziv-compressor)
+- [2. Evaluation](#2-evaluation)
+  - [2.1 Compare across implemented compressors](#21-compare-across-implemented-compressors)
+  - [2.2 Compare with existing compressor](#22-compare-with-existing-compressor)
+  - [2.3 Evaluate program length](#23-evaluate-program-length)
+- [3. Discussion](#3-discussion)
+- [References:](#references)
 
 
 Using Python, I've implemented 3 text compressor, which are the Letter-level Huffman compressor, the Word-level Huffman compressor and the Lempel-Ziv compressor.
